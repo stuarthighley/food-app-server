@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"food-app/domain/entity"
 	"food-app/domain/repository"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
@@ -15,8 +16,8 @@ type Repositories struct {
 }
 
 func NewRepositories(Dbdriver, DbUser, DbPassword, DbPort, DbHost, DbName string) (*Repositories, error) {
-	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
-	db, err := gorm.Open(Dbdriver, DBURL)
+	dbURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
+	db, err := gorm.Open(Dbdriver, dbURL)
 	if err != nil {
 		return nil, err
 	}
@@ -29,12 +30,12 @@ func NewRepositories(Dbdriver, DbUser, DbPassword, DbPort, DbHost, DbName string
 	}, nil
 }
 
-//closes the  database connection
+// closes the  database connection
 func (s *Repositories) Close() error {
 	return s.db.Close()
 }
 
-//This migrate all tables
+// This migrate all tables
 func (s *Repositories) Automigrate() error {
 	return s.db.AutoMigrate(&entity.User{}, &entity.Food{}).Error
 }

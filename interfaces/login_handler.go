@@ -5,11 +5,12 @@ import (
 	"food-app/application"
 	"food-app/domain/entity"
 	"food-app/infrastructure/auth"
-	"github.com/dgrijalva/jwt-go"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
 	"strconv"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 )
 
 type Authenticate struct {
@@ -18,7 +19,7 @@ type Authenticate struct {
 	tk auth.TokenInterface
 }
 
-//Authenticate constructor
+// Authenticate constructor
 func NewAuthenticate(uApp application.UserAppInterface, rd auth.AuthInterface, tk auth.TokenInterface) *Authenticate {
 	return &Authenticate{
 		us: uApp,
@@ -83,7 +84,7 @@ func (au *Authenticate) Logout(c *gin.Context) {
 	c.JSON(http.StatusOK, "Successfully logged out")
 }
 
-//Refresh is the function that uses the refresh_token to generate new pairs of refresh and access tokens.
+// Refresh is the function that uses the refresh_token to generate new pairs of refresh and access tokens.
 func (au *Authenticate) Refresh(c *gin.Context) {
 	mapToken := map[string]string{}
 	if err := c.ShouldBindJSON(&mapToken); err != nil {

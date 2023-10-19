@@ -2,8 +2,9 @@ package persistence
 
 import (
 	"food-app/domain/entity"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 //SINCE WE ARE SPINNING UP A DATABASE, THE TESTS HERE ARE INTEGRATION TESTS
@@ -32,8 +33,8 @@ func TestSaveUser_Success(t *testing.T) {
 	assert.NotEqual(t, u.Password, "password")
 }
 
-//Failure can be due to duplicate email, etc
-//Here, we will attempt saving a user that is already saved
+// Failure can be due to duplicate email, etc
+// Here, we will attempt saving a user that is already saved
 func TestSaveUser_Failure(t *testing.T) {
 
 	conn, err := DBConn()
@@ -102,7 +103,7 @@ func TestGetUserByEmailAndPassword_Success(t *testing.T) {
 		t.Fatalf("want non error, got %#v", err)
 	}
 	//seed the user
-	u, err := seedUser(conn)
+	_, err = seedUser(conn)
 	if err != nil {
 		t.Fatalf("want non error, got %#v", err)
 	}

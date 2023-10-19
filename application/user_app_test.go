@@ -2,8 +2,9 @@ package application
 
 import (
 	"food-app/domain/entity"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 //IF YOU HAVE TIME, YOU CAN TEST ALL THE METHODS FAILURES

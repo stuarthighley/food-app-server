@@ -6,17 +6,18 @@ import (
 	"fmt"
 	"food-app/domain/entity"
 	"food-app/infrastructure/auth"
-	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
+
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
 )
 
 //IF YOU HAVE TIME, YOU CAN TEST ALL FAILURE CASES TO IMPROVE COVERAGE
 
-//We dont need to mock the application layer, because we won't get there. So we will use table test to cover all validation errors
+// We dont need to mock the application layer, because we won't get there. So we will use table test to cover all validation errors
 func Test_Login_Invalid_Data(t *testing.T) {
 	samples := []struct {
 		inputJSON  string

@@ -4,19 +4,20 @@ import (
 	"food-app/application"
 	"food-app/domain/entity"
 	"food-app/infrastructure/auth"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
-//Users struct defines the dependencies that will be used
+// Users struct defines the dependencies that will be used
 type Users struct {
 	us application.UserAppInterface
 	rd auth.AuthInterface
 	tk auth.TokenInterface
 }
 
-//Users constructor
+// Users constructor
 func NewUsers(us application.UserAppInterface, rd auth.AuthInterface, tk auth.TokenInterface) *Users {
 	return &Users{
 		us: us,

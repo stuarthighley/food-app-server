@@ -2,15 +2,15 @@ package auth
 
 import (
 	"fmt"
-	"github.com/dgrijalva/jwt-go"
-	"github.com/twinj/uuid"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
 	"time"
-)
 
+	"github.com/dgrijalva/jwt-go"
+	"github.com/twinj/uuid"
+)
 
 type Token struct{}
 
@@ -23,7 +23,7 @@ type TokenInterface interface {
 	ExtractTokenMetadata(*http.Request) (*AccessDetails, error)
 }
 
-//Token implements the TokenInterface
+// Token implements the TokenInterface
 var _ TokenInterface = &Token{}
 
 func (t *Token) CreateToken(userid uint64) (*TokenDetails, error) {
@@ -60,13 +60,13 @@ func (t *Token) CreateToken(userid uint64) (*TokenDetails, error) {
 }
 
 func TokenValid(r *http.Request) error {
-	token, err := VerifyToken(r)
+	_, err := VerifyToken(r)
 	if err != nil {
 		return err
 	}
-	if _, ok := token.Claims.(jwt.Claims); !ok && !token.Valid {
-		return err
-	}
+	// if _, ok := token.Claims.(jwt.Claims); !ok && !token.Valid {
+	// 	return err
+	// }
 	return nil
 }
 
@@ -85,7 +85,7 @@ func VerifyToken(r *http.Request) (*jwt.Token, error) {
 	return token, nil
 }
 
-//get the token from the request body
+// get the token from the request body
 func ExtractToken(r *http.Request) string {
 	bearToken := r.Header.Get("Authorization")
 	strArr := strings.Split(bearToken, " ")

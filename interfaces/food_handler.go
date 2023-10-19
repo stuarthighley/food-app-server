@@ -6,11 +6,12 @@ import (
 	"food-app/domain/entity"
 	"food-app/infrastructure/auth"
 	"food-app/interfaces/fileupload"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Food struct {
@@ -21,7 +22,7 @@ type Food struct {
 	rd         auth.AuthInterface
 }
 
-//Food constructor
+// Food constructor
 func NewFood(fApp application.FoodAppInterface, uApp application.UserAppInterface, fd fileupload.UploadFileInterface, rd auth.AuthInterface, tk auth.TokenInterface) *Food {
 	return &Food{
 		foodApp:    fApp,

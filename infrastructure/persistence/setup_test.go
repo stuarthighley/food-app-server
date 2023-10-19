@@ -3,16 +3,16 @@ package persistence
 import (
 	"fmt"
 	"food-app/domain/entity"
-	"github.com/jinzhu/gorm"
-	"github.com/joho/godotenv"
 	"log"
 	"os"
+
+	"github.com/jinzhu/gorm"
+	"github.com/joho/godotenv"
 )
 
 func DBConn() (*gorm.DB, error) {
 	if _, err := os.Stat("./../../.env"); !os.IsNotExist(err) {
-		var err error
-		err = godotenv.Load(os.ExpandEnv("./../../.env"))
+		err := godotenv.Load(os.ExpandEnv("./../../.env"))
 		if err != nil {
 			log.Fatalf("Error getting env %v\n", err)
 		}
@@ -21,18 +21,18 @@ func DBConn() (*gorm.DB, error) {
 	return CIBuild()
 }
 
-//Circle CI DB
+// Circle CI DB
 func CIBuild() (*gorm.DB, error) {
 	var err error
-	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", "127.0.0.1", "5432", "steven", "food-app-test", "password")
-	conn, err := gorm.Open("postgres", DBURL)
+	dbURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", "127.0.0.1", "5432", "steven", "food-app-test", "password")
+	conn, err := gorm.Open("postgres", dbURL)
 	if err != nil {
 		log.Fatal("This is the error:", err)
 	}
 	return conn, nil
 }
 
-//Local DB
+// Local DB
 func LocalDatabase() (*gorm.DB, error) {
 	dbdriver := os.Getenv("TEST_DB_DRIVER")
 	host := os.Getenv("TEST_DB_HOST")
@@ -41,8 +41,8 @@ func LocalDatabase() (*gorm.DB, error) {
 	dbname := os.Getenv("TEST_DB_NAME")
 	port := os.Getenv("TEST_DB_PORT")
 
-	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", host, port, user, dbname, password)
-	conn, err := gorm.Open(dbdriver, DBURL)
+	dbURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", host, port, user, dbname, password)
+	conn, err := gorm.Open(dbdriver, dbURL)
 	if err != nil {
 		return nil, err
 	} else {

@@ -9,7 +9,7 @@ type userApp struct {
 	us repository.UserRepository
 }
 
-//UserApp implements the UserAppInterface
+// UserApp implements the UserAppInterface
 var _ UserAppInterface = &userApp{}
 
 type UserAppInterface interface {

@@ -2,8 +2,9 @@ package persistence
 
 import (
 	"food-app/domain/entity"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSaveFood_Success(t *testing.T) {
@@ -25,8 +26,8 @@ func TestSaveFood_Success(t *testing.T) {
 	assert.EqualValues(t, f.UserID, 1)
 }
 
-//Failure can be due to duplicate email, etc
-//Here, we will attempt saving a food that is already saved
+// Failure can be due to duplicate email, etc
+// Here, we will attempt saving a food that is already saved
 func TestSaveFood_Failure(t *testing.T) {
 	conn, err := DBConn()
 	if err != nil {
@@ -110,7 +111,7 @@ func TestUpdateFood_Success(t *testing.T) {
 	assert.EqualValues(t, f.UserID, 1)
 }
 
-//Duplicate title error
+// Duplicate title error
 func TestUpdateFood_Failure(t *testing.T) {
 	conn, err := DBConn()
 	if err != nil {

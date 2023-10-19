@@ -3,9 +3,10 @@ package middleware
 import (
 	"bytes"
 	"food-app/infrastructure/auth"
-	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func AuthMiddleware() gin.HandlerFunc {
@@ -38,8 +39,8 @@ func CORSMiddleware() gin.HandlerFunc {
 	}
 }
 
-//Avoid a large file from loading into memory
-//If the file size is greater than 8MB dont allow it to even load into memory and waste our time.
+// Avoid a large file from loading into memory
+// If the file size is greater than 8MB dont allow it to even load into memory and waste our time.
 func MaxSizeAllowed(n int64) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, n)

@@ -2,8 +2,9 @@ package application
 
 import (
 	"food-app/domain/entity"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 //IF YOU HAVE TIME, YOU CAN TEST ALL THE METHODS FAILURES
@@ -34,7 +35,7 @@ func (f *fakeFoodRepo) DeleteFood(foodId uint64) error {
 	return deleteFoodRepo(foodId)
 }
 
-//var fakeFood repository.FoodRepository = &fakeFoodRepo{} //this is where the real implementation is swap with our fake implementation
+// var fakeFood repository.FoodRepository = &fakeFoodRepo{} //this is where the real implementation is swap with our fake implementation
 var foodAppFake FoodAppInterface = &fakeFoodRepo{} //this is where the real implementation is swap with our fake implementation
 
 func TestSaveFood_Success(t *testing.T) {

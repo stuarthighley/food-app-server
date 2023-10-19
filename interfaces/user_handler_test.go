@@ -5,12 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"food-app/domain/entity"
-	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
 	"testing"
+
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
 )
 
 //IF YOU HAVE TIME, YOU CAN TEST ALL FAILURE CASES TO IMPROVE COVERAGE
@@ -48,7 +49,7 @@ func TestSaveUser_Success(t *testing.T) {
 	assert.EqualValues(t, user.LastName, "steven")
 }
 
-//We dont need to mock the application layer, because we won't get there. So we will use table test to cover all validation errors
+// We dont need to mock the application layer, because we won't get there. So we will use table test to cover all validation errors
 func Test_SaveUser_Invalidating_Data(t *testing.T) {
 	samples := []struct {
 		inputJSON  string
@@ -123,7 +124,7 @@ func Test_SaveUser_Invalidating_Data(t *testing.T) {
 	}
 }
 
-//One of such db error is invalid email, it return that from the application and test.
+// One of such db error is invalid email, it return that from the application and test.
 func TestSaveUser_DB_Error(t *testing.T) {
 	//application.UserApp = &fakeUserApp{}
 	userApp.SaveUserFn = func(*entity.User) (*entity.User, map[string]string) {
@@ -157,7 +158,7 @@ func TestSaveUser_DB_Error(t *testing.T) {
 
 ////////////////////////////////////////////////////////////////
 
-//GetUsers Test
+// GetUsers Test
 func TestGetUsers_Success(t *testing.T) {
 	userApp.GetUsersFn = func() ([]entity.User, error) {
 		//remember we are running sensitive info such as email and password
@@ -194,7 +195,7 @@ func TestGetUsers_Success(t *testing.T) {
 
 ///////////////////////////////////////////////////////////////
 
-//GetUser Test
+// GetUser Test
 func TestGetUser_Success(t *testing.T) {
 	//application.UserApp = &fakeUserApp{}
 	userApp.GetUserFn = func(uint64) (*entity.User, error) {
